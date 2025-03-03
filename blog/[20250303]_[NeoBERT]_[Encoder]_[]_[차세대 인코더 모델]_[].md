@@ -1,4 +1,4 @@
-https://arxiv.org/html/2502.19587v1#S4
+[https://arxiv.org/html/2502.19587v1#S4](https://arxiv.org/pdf/2502.19587v1)
 
 ## **NeoBERT의 핵심 요약**
 

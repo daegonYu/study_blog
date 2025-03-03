@@ -1,6 +1,6 @@
 # Automatic Instruction Evolving for Large Language Models
 <br>
-[https://arxiv.org/html/2406.00770v1#bib.bib29](https://arxiv.org/html/2406.00770v1#bib.bib29)
+[https://arxiv.org/html/2406.00770v1#bib.bib29]
 <br>
 
 ![image](https://github.com/user-attachments/assets/00ab5bb8-32ac-4c0d-9070-2e4e5ccfa762)
@@ -159,7 +159,8 @@ Optimizer LLM이 항상 **완벽한 피드백을 제공하는 것은 아님**.
 3. **가장 실패율(λ)이 낮은 변형 방법을 선택**:
 
     
-    ![image.png](attachment:f314f752-6cbb-441a-aff5-8768f9b0ba40:image.png)
+   ![image](https://github.com/user-attachments/assets/30d5b9eb-9de3-4d4f-92cb-d6e83b9539d2)
+
     
     - F(r) = 변형이 실패했으면 1, 성공했으면 0.
     - D = 평가용 데이터셋.
@@ -314,7 +315,8 @@ Optimizer LLM이 항상 **완벽한 피드백을 제공하는 것은 아님**.
 
 ---
 
-![image.png](attachment:a5df2ea7-5005-4046-95c5-894367df092c:image.png)
+![image](https://github.com/user-attachments/assets/283ac24f-04b4-4330-b444-3d72e68f8b7a)
+
 
 이미지에서 **"Prompt for Evol Trajectory Analysis"**라는 제목과 함께 **Optimizer LLM이 Instruction Evolution 과정에서 실패한 사례를 식별하는 프롬프트**가 포함되어 있습니다.
 
@@ -352,7 +354,8 @@ Optimizer LLM이 실패 사례를 분석하고 이를 바탕으로 **Instruction
 
 ---
 
-![image.png](attachment:5935bf7b-0ddb-48be-8c77-fb84568f1ce8:image.png)
+![image](https://github.com/user-attachments/assets/ba994f55-74e6-4fcd-ba9f-2d303e546229)
+
 
 ### **📌 이미지 분석: Prompt for Evolving Method Optimization**
 

@@ -22,7 +22,6 @@ I am an **NLP researcher** with a strong focus on **semantic retrievers, retriev
 
 ## 📍 Location
 🌍 **Seoul, South Korea**  
-🔗 ORCID: [0000-0003-4331-8302](https://orcid.org/0000-0003-4331-8302)  
 
 ## 📫 Contact  
 📧 Feel free to reach out for collaborations, discussions, or just to connect!  

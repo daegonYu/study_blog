@@ -8,11 +8,11 @@
         "download_url": "/menu/blog.md"
     },
     {
-        "name": "Huggingface.md",
-        "download_url": "/menu/Huggingface.md"
+        "name": "huggingface.md",
+        "download_url": "/menu/huggingface.md"
     },
     {
-    "name": "Codinglevel.md",
-    "download_url": "/menu/Codinglevel.md"
+    "name": "codinglevel.md",
+    "download_url": "/menu/codinglevel.md"
     }
 ]

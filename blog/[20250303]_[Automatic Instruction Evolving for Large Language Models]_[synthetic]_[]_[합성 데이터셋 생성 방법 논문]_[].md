@@ -1,7 +1,6 @@
 # Automatic Instruction Evolving for Large Language Models
-<br>
-[https://arxiv.org/html/2406.00770v1#bib.bib29]
-<br>
+
+https://arxiv.org/html/2406.00770v1#bib.bib29
 
 ![image](https://github.com/user-attachments/assets/00ab5bb8-32ac-4c0d-9070-2e4e5ccfa762)
 

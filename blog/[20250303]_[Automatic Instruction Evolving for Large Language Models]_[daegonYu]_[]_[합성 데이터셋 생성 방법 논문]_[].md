@@ -3,7 +3,8 @@
 https://arxiv.org/html/2406.00770v1#bib.bib29
 <br>
 
-![image.png](attachment:fcb2bce2-b132-4bc3-a314-755a7782f1ff:image.png)
+![image](https://github.com/user-attachments/assets/00ab5bb8-32ac-4c0d-9070-2e4e5ccfa762)
+
 
 논문 **"Automatic Instruction Evolving for Large Language Models"**(Weihao Zeng et al., Microsoft)의 핵심 내용을 쉽게 이해할 수 있도록 설명해드리겠습니다.
 

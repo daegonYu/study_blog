@@ -74,14 +74,11 @@ f(d,q)=ϕ(d)⋅ψ(q)
 ## 🔹 논문의 핵심 기여와 의의
 - Dense Document Embedding을 Context-aware하게 확장
 - 기존 biencoder 방식 대비 문맥을 반영하여 도메인 적응성이 향상됨
-- Contrastive Learning 개선
 - 문서 클러스터링 기반 contrastive loss를 적용하여 학습 효과를 극대화
 - 효율적인 Contextual Encoding 아키텍처 제안
 - 두 단계로 문서 임베딩을 생성하여 retrieval 성능을 향상시킴
 - Retrieval 모델을 도메인 특화 없이도 효과적으로 학습 가능
 - 기존에 필요했던 복잡한 hard negative sampling 없이도 성능 향상
-- 논문에서는 retrieval을 중심으로 설명했지만, 문서 분류, 요약, 질의응답(QA) 등에도 적용 가능
-- 특히, 법률, 의료, 금융 도메인처럼 도메인 특성이 중요한 분야에서 효과적일 가능성이 높음
 
 ---
 
@@ -101,6 +98,7 @@ f(d,q)=ϕ(d)⋅ψ(q)
 
 
 ### 1️⃣ False Negative Filtering (거짓 부정 샘플 제거)
+
 - Retrieval 시스템에서 negative sample(비슷하지 않은 문서)을 선정할 때, 실제로는 관련이 있는 문서가 잘못된 negative로 포함될 가능성이 있음.
 - 논문에서는 false negative를 줄이기 위해 새로운 filtering 기법을 제안:
 특정 문서 d에 대해, surrogate scoring function **f(q, d')**을 사용해 비슷한 문서를 걸러냄.
@@ -121,6 +119,7 @@ f(d,q)=ϕ(d)⋅ψ(q)
 ---
 
 ### 2️⃣ Batch Packing & Clustering 최적화
+
 논문에서 배치(batch)를 구성하는 방법도 상당히 신경 써서 설계되었음.
 
 - 기존 contrastive learning에서는 batch에 임의로 negative sample을 포함하지만, 이 논문에서는 더 도전적인(difficult) negative를 포함하는 방식을 사용.
@@ -132,6 +131,7 @@ f(d,q)=ϕ(d)⋅ψ(q)
    
  ⚡ Packing 전략
 - batch 크기가 고정되어야 하는데, clustering 결과로 배치 크기가 다를 수 있음.
+  
 이를 해결하기 위해:
  - 랜덤 배치 분할(Random Partitioning)
  - Greedy Traveling Salesman 기반 배치 구성
@@ -145,6 +145,7 @@ f(d,q)=ϕ(d)⋅ψ(q)
 ---
 
 ### 3️⃣ Two-Stage Gradient Caching (메모리 효율 최적화)
+
 논문에서는 훈련 시 메모리 사용량을 최적화하는 기법도 포함하고 있음.
 
 새로운 모델 구조는 기존 biencoder보다 연산량이 증가하는데, 이를 해결하기 위해 Gradient Caching 기법을 적용.
@@ -166,37 +167,44 @@ f(d,q)=ϕ(d)⋅ψ(q)
 
 ### 4️⃣ Implementation Details (구현 관련 추가 내용)
 논문에서는 실험 설정을 매우 구체적으로 설명함.
+
 🔹 사전 훈련된 모델: NomicBERT (137M parameters)
+
 🔹 FAISS 기반 K-Means Clustering 사용 (배치 구성 시 활용)
+
 🔹 Optimizer: Adam, warmup step 1000, learning rate 2e-5 → 선형 감소
+
 🔹 Supervised + Unsupervised 학습 병행
+
 🔹 BEIR, MTEB 벤치마크에서 평가
+
 
 ✅ FAISS 기반 클러스터링을 활용하여 batch 구성 최적화.
 
 ✅ NomicBERT 모델을 기반으로 학습을 수행하고, 다양한 하이퍼파라미터 튜닝을 진행.
 
 ## 🔥 Detail 정리
+
 📌 False Negative Filtering
 
-✅ 기존 contrastive learning의 문제점(잘못된 negative sample 포함)을 해결하기 위해 filtering 기법을 추가
+ ✅ 기존 contrastive learning의 문제점(잘못된 negative sample 포함)을 해결하기 위해 filtering 기법을 추가
 
 📌 Batch Packing & Clustering 최적화
 
-✅ 배치를 단순 랜덤 샘플링하는 것이 아니라 문서 유사도 기반 클러스터링 후 구성
-
-✅ Greedy Traveling Salesman 기반 batch packing 기법을 활용
+ ✅ 배치를 단순 랜덤 샘플링하는 것이 아니라 문서 유사도 기반 클러스터링 후 구성
+ 
+ ✅ Greedy Traveling Salesman 기반 batch packing 기법을 활용
 
 📌 Two-Stage Gradient Caching (메모리 최적화 기법)
-
-✅ 훈련 과정에서 gradient caching을 적용해 메모리 사용량을 절감
+ 
+ ✅ 훈련 과정에서 gradient caching을 적용해 메모리 사용량을 절감
 
 📌 Implementation 세부 정보
 
-✅ NomicBERT (137M parameters) 기반으로 실험 진행
-
-✅ FAISS 기반 K-Means Clustering 활용
-
-✅ BEIR, MTEB 벤치마크에서 성능 평가
+ ✅ NomicBERT (137M parameters) 기반으로 실험 진행
+ 
+ ✅ FAISS 기반 K-Means Clustering 활용
+ 
+ ✅ BEIR, MTEB 벤치마크에서 성능 평가
 
 

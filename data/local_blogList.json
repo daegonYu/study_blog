@@ -14,5 +14,9 @@
     {
         "name": "[20250303]_[EXAONE 3.5]_[LLM]_[]_[LG AI Research가 개발한 EXAONE 3.5는 다양한 크기의 인스트럭션 튜닝된 LLM(대규모 언어 모델) 시리즈]_[].md",
         "download_url": "blog/[20250303]_[EXAONE 3.5]_[LLM]_[]_[LG AI Research가 개발한 EXAONE 3.5는 다양한 크기의 인스트럭션 튜닝된 LLM(대규모 언어 모델) 시리즈]_[].md"
+    },
+    {
+        "name": "[20250304]_[CONTEXTUAL DOCUMENT EMBEDDINGS]_[Embedding]_[]_[새로운 학습 방식을 적용한 MTEB SOTA 모델, out of domain에서도 효과적이라고 함]_[].md",
+        "download_url":"blog/[20250304]_[CONTEXTUAL DOCUMENT EMBEDDINGS]_[Embedding]_[]_[새로운 학습 방식을 적용한 MTEB SOTA 모델, out of domain에서도 효과적이라고 함]_[].md"
     }
 ]

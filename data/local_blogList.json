@@ -22,5 +22,9 @@
     {
         "name": "[20250305]_[DeBERTa]_[Encoder]_[]_[마이크로소프트의 Encoder 모델(메타가 만든 RoBERTa 후속작)]_[].md",
         "download_url": "blog/[20250305]_[DeBERTa]_[Encoder]_[]_[마이크로소프트의 Encoder 모델(메타가 만든 RoBERTa 후속작)]_[].md"
+    },
+    {
+        "name": "[20250308]_[LIMO: Less is More for Reasoning]_[Synthetic]_[]_[LIMA 논문의 후속작 Reasoning 모델을 만드는 SFT 데이터셋]_[].md",
+        "download_url": "blog/[20250308]_[LIMO: Less is More for Reasoning]_[Synthetic]_[]_[LIMA 논문의 후속작 Reasoning 모델을 만드는 SFT 데이터셋]_[].md"
     }
 ]

@@ -302,14 +302,14 @@ A: 철수는 처음에 3개의 사과를 가지고 있습니다.
 
 ---
 
-### **🔹 4.3 실험 방법**
+### **🔹 실험 방법**
 
 - **CSQA, StrategyQA, SayCan**: 학습 데이터에서 무작위로 샘플을 선택한 후, 직접 Chain-of-Thought (CoT)를 작성하여 few-shot 예제로 사용.
 - **BIG-bench Date Understanding, Sports Understanding**: 훈련 데이터가 없으므로 평가 데이터에서 처음 10개 샘플을 선택하여 few-shot 예제로 사용.
 
 ---
 
-### **🔹 4.4 실험 결과**
+### **🔹 실험 결과**
 
 - **모델 크기가 증가할수록 성능 향상**
     - **PaLM 540B 모델이 가장 큰 성능 개선을 보임.**

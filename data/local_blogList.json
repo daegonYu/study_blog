@@ -26,5 +26,9 @@
     {
         "name": "[20250308]_[LIMO: Less is More for Reasoning]_[Synthetic]_[]_[LIMA 논문의 후속작 Reasoning 모델을 만드는 SFT 데이터셋]_[].md",
         "download_url": "blog/[20250308]_[LIMO: Less is More for Reasoning]_[Synthetic]_[]_[LIMA 논문의 후속작 Reasoning 모델을 만드는 SFT 데이터셋]_[].md"
+    },
+    {
+        "name" : "[20250309]_[Chain-of-Thought Prompting Elicits Reasoning in Large Language Models]_[LLM]_[]_[구글의 CoT 초기 논문]_[].md",
+        "download_url" : "blog/[20250309]_[Chain-of-Thought Prompting Elicits Reasoning in Large Language Models]_[LLM]_[]_[구글의 CoT 초기 논문]_[].md"
     }
 ]

@@ -30,5 +30,9 @@
     {
         "name" : "[20250309]_[Chain-of-Thought Prompting Elicits Reasoning in Large Language Models]_[LLM]_[]_[구글의 CoT 초기 논문]_[].md",
         "download_url" : "blog/[20250309]_[Chain-of-Thought Prompting Elicits Reasoning in Large Language Models]_[LLM]_[]_[구글의 CoT 초기 논문]_[].md"
+    },
+    {
+        "name" : "[20250312]_[COIL]_[Embedding]_[]_[Lexical search와 Embedding search의 합작]_[].md",
+        "download_url" : "blog/[20250312]_[COIL]_[Embedding]_[]_[Lexical search와 Embedding search의 합작]_[].md"
     }
 ]

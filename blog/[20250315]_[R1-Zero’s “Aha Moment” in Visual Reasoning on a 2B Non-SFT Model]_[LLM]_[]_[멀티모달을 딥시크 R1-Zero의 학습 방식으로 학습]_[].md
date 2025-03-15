@@ -2,7 +2,7 @@
 
 https://arxiv.org/html/2503.05132v2
 
-![image](https://github.com/user-attachments/assets/fa04dcf6-bb79-490e-b2a8-7d24bfbf166f)
+<img src="https://github.com/user-attachments/assets/fa04dcf6-bb79-490e-b2a8-7d24bfbf166f" width="500">
 
 
 ## 📌 논문의 주요 내용 요약

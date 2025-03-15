@@ -34,5 +34,9 @@
     {
         "name" : "[20250312]_[COIL]_[Embedding]_[]_[Lexical search와 Embedding search의 합작]_[].md",
         "download_url" : "blog/[20250312]_[COIL]_[Embedding]_[]_[Lexical search와 Embedding search의 합작]_[].md"
+    },
+    {
+        "name" : "[20250315]_[R1-Zero’s “Aha Moment” in Visual Reasoning on a 2B Non-SFT Model]_[LLM]_[]_[멀티모달을 딥시크 R1-Zero의 학습 방식으로 학습]_[].md",
+        "download_url" : "blog/[20250315]_[R1-Zero’s “Aha Moment” in Visual Reasoning on a 2B Non-SFT Model]_[LLM]_[]_[멀티모달을 딥시크 R1-Zero의 학습 방식으로 학습]_[].md"
     }
 ]

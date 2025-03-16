@@ -25,17 +25,22 @@ https://arxiv.org/html/2503.07891v1
 1. **Gemini LLM 기반 임베딩 모델**
     - Google의 최신 대형 언어 모델(LLM)인 Gemini를 활용하여 강력한 텍스트 임베딩 모델을 개발함.
     - 다국어 및 코드 이해 능력을 활용해 다양한 언어 및 텍스트 모달리티에서 우수한 일반화 성능을 보임.
+    
 2. **다양한 다운스트림 작업 적용 가능**
     - 사전 계산된 임베딩을 사용하여 분류(Classification), 유사성 측정(Similarity), 군집화(Clustering), 랭킹(Ranking), 정보 검색(Retrieval) 등 다양한 작업 수행 가능.
+
 3. **대규모 벤치마크에서 최고 성능 기록**
     - Massive Multilingual Text Embedding Benchmark (MMTEB)에서 기존 SOTA(State-of-the-Art) 모델을 뛰어넘는 성능을 달성.
     - **250개 이상의 언어, 100개 이상의 평가 작업**에서 실험을 진행하며 강력한 임베딩 품질을 입증함.
+
 4. **LLM을 활용한 데이터 정제 및 학습 최적화**
     - Gemini를 활용하여 저품질 데이터를 필터링하고, 검색을 위한 긍정적(Positive) 및 부정적(Negative) 예제 샘플을 선정하며, 풍부한 합성 데이터를 생성하여 학습 데이터의 질을 높임.
     - Contrastive Learning(대조 학습) 기법을 사용하여 더 나은 의미적 표현을 학습.
+
 5. **모델 성능 향상을 위한 추가 기법 적용**
     - **Task Prompting 및 Pre-Finetuning** 단계 추가: 기존 Gecko 모델의 성공을 기반으로 더욱 성능을 높임.
     - **Model Soup 기법 활용**: 여러 개의 Fine-tuned 체크포인트를 평균화(ensemble)하여 최종 성능을 향상.
+
 6. **광범위한 평가 및 최고 성능 달성**
     - **MMTEB 벤치마크에서 1위** (Borda rank 기준).
     - 평균 점수 68.32로 기존 최고 모델(multilingual-e5-large-instruct)보다 **+5.09 개선**.
@@ -56,7 +61,7 @@ https://arxiv.org/html/2503.07891v1
 
 ---
 
-### **📌 3.1 모델 아키텍처**
+## **📌 3.1 모델 아키텍처**
 
 ### **✅ 모델의 주요 구조**
 
@@ -75,7 +80,7 @@ Gemini LLM을 기반으로 Transformer가 토큰을 임베딩 벡터로 변환 �
 
 ---
 
-### **📌 3.2 학습 목표 (Training Objective)**
+## **📌 3.2 학습 목표 (Training Objective)**
 
 Gemini Embedding 모델은 **Noise-Contrastive Estimation (NCE) Loss**를 사용하여 학습됩니다.
 
@@ -101,7 +106,7 @@ Gemini Embedding 모델은 **Noise-Contrastive Estimation (NCE) Loss**를 사용
 
 ---
 
-### **📌 3.3 학습 과정 (Recipe)**
+## **📌 3.3 학습 과정 (Recipe)**
 
 **Gemini Embedding 모델은 3단계로 학습**됩니다.
 
@@ -141,7 +146,7 @@ Gemini Embedding 모델은 **다양한 다국어 임베딩 작업 및 코드 검
 
 ---
 
-### **📌 4.1 학습 데이터 구성 (Training Data Mixture)**
+## **📌 4.1 학습 데이터 구성 (Training Data Mixture)**
 
 ### **✅ Pre-Finetuning 데이터**
 
@@ -172,7 +177,7 @@ Gemini Embedding 모델은 **다양한 다국어 임베딩 작업 및 코드 검
 
 ---
 
-### **📌 4.2 Gemini를 활용한 데이터 품질 향상 (Improving Data Quality with Gemini)**
+## **📌 4.2 Gemini를 활용한 데이터 품질 향상 (Improving Data Quality with Gemini)**
 
 ### **✅ 1. 합성 데이터 생성 (Synthetic Data Generation)**
 
@@ -234,7 +239,7 @@ Gemini Embedding 모델은 **다양한 다국어 임베딩 작업 및 코드 검
 
 ---
 
-### **📌 6.1 다국어 일반화 성능 (Does Gemini Embedding Generalize to Multilingual Tasks?)**
+## **📌 6.1 다국어 일반화 성능 (Does Gemini Embedding Generalize to Multilingual Tasks?)**
 
 🔹 **실험 목적:**
 
@@ -261,7 +266,7 @@ Gemini Embedding 모델은 **다양한 다국어 임베딩 작업 및 코드 검
 
 ---
 
-### **📌 6.2 Gemini가 데이터 품질을 어떻게 개선하는가? (How Does Gemini Improve Data Quality?)**
+## **📌 6.2 Gemini가 데이터 품질을 어떻게 개선하는가? (How Does Gemini Improve Data Quality?)**
 
 이 실험에서는 **Gemini LLM을 활용한 데이터 품질 개선 기법(합성 데이터 생성, 데이터 필터링, 하드 네거티브 샘플링)의 효과**를 분석합니다.
 
@@ -344,7 +349,7 @@ Gemini Embedding 모델은 **다양한 다국어 임베딩 작업 및 코드 검
 
 # 질문사항
 
-# 질문 1
+## 질문 1
 
 **하드네거티브 선택 시 : 가장 높은 점수가 아닌 낮은 점수를 받은 후보 문서(k번째 문서)가 최적의 하드 네거티브로 선택한 이유**
 

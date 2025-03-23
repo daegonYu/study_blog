@@ -42,5 +42,9 @@
     {
         "name" : "[20250316]_[Gemini Embedding: Generalizable Embeddings from Gemini]_[Embedding]_[]_[현 최강 임베딩 모델 Gemini Embedding]_[].md",
         "download_url" : "blog/[20250316]_[Gemini Embedding: Generalizable Embeddings from Gemini]_[Embedding]_[]_[현 최강 임베딩 모델 Gemini Embedding]_[].md"
+    },
+    {
+        "name" : "[20250323]_[LADDER]_[LLM]_[]_[수학문제를 잘 푸는 모델 GRPO 학습과 어려운 문제를 단계별로 쪼개어 푸는 방법론]_[].md",
+        "download_url" : "blog/[20250323]_[LADDER]_[LLM]_[]_[수학문제를 잘 푸는 모델 GRPO 학습과 어려운 문제를 단계별로 쪼개어 푸는 방법론]_[].md"
     }
 ]

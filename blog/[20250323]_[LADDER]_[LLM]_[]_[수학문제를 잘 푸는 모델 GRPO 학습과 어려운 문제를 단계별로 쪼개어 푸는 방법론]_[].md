@@ -8,7 +8,6 @@ https://arxiv.org/html/2503.00735v3
 
 # 개요
 
----
 
 ## 📌 논문의 핵심 아이디어
 
@@ -86,7 +85,6 @@ LADDER (**Learning through Autonomous Difficulty-Driven Example Recursion**):
 
 # 세부내용
 
----
 
 ## 📌 LADDER 개요
 
@@ -200,7 +198,7 @@ LADDER의 목적은 복잡한 문제를 단계적으로 하위 문제로 쪼개�
 
 ---
 
-## 📌  강화학습 프로토콜 (Reinforcement Learning Protocol)
+## 📌  강화학습 프로토콜 (Reinforcement Learning Protocol) 이란?
 
 이 논문에서는 **GRPO (Group Relative Policy Optimization)** 라는 강화학습 기법을 사용합니다.
 
@@ -239,7 +237,7 @@ LADDER의 목적은 복잡한 문제를 단계적으로 하위 문제로 쪼개�
 
 ---
 
-## 📌 Test-Time Reinforcement Learning (TTRL)
+## 📌 Test-Time Reinforcement Learning (TTRL) 이란?
 
 TTRL은 LADDER의 아이디어를 추론(테스트) 시점에 적용하여 **모델이 실시간으로 학습하면서 문제를 풀게 하는 기법**입니다.
 

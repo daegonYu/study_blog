@@ -181,7 +181,7 @@ Optimizer LLM이 항상 **완벽한 피드백을 제공하는 것은 아님**.
 
 ➡ **이 자동화된 방법을 통해, 더 좋은 Instruction 데이터셋을 만들고, 모델을 더욱 정교하게 학습할 수 있음**.
 
-### 🔍 핵심 요약
+### **🔍 핵심 요약**
 
 | 단계 | 설명 |
 | --- | --- |
@@ -245,7 +245,7 @@ Optimizer LLM이 항상 **완벽한 피드백을 제공하는 것은 아님**.
 - 연산 비용(Resource Consumption)이 증가하여 **학습 비용이 커짐**.
 - 불필요한 정보가 누적되면서 **Instruction 변형이 비효율적으로 복잡해질 가능성**.
 
-### 🔍 핵심 요약
+### **🔍 핵심 요약**
 
 - 최적화 횟수가 **1에서 9로 증가하면 성능이 개선**됨.
 - 하지만 **12회를 초과하면 성능이 저하**됨 (과최적화 문제).
@@ -332,8 +332,6 @@ Optimizer LLM이 실패 사례를 분석하고 이를 바탕으로 **Instruction
 
 ![image](https://github.com/user-attachments/assets/ba994f55-74e6-4fcd-ba9f-2d303e546229)
 
-
-### **Prompt for Evolving Method Optimization**
 
 ### **핵심 내용**
 

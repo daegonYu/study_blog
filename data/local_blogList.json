@@ -9,35 +9,35 @@
     },
     {
         "name": "[20250303]_[EXAONE 3.5]_[LLM]_[]_[LG AI Research가 개발한 EXAONE 3.5는 다양한 크기의 인스트럭션 튜닝된 LLM(대규모 언어 모델) 시리즈]_[].md",
-        "download_url": "blog/[20250303]_[EXAONE 3.5]_[LLM]_[]_[LG AI Research가 개발한 EXAONE 3.5는 다양한 크기의 인스트럭션 튜닝된 LLM(대규모 언어 모델) 시리즈]_[].md"
+        "download_url": "/blog/[20250303]_[EXAONE 3.5]_[LLM]_[]_[LG AI Research가 개발한 EXAONE 3.5는 다양한 크기의 인스트럭션 튜닝된 LLM(대규모 언어 모델) 시리즈]_[].md"
     },
     {
         "name": "[20250304]_[CONTEXTUAL DOCUMENT EMBEDDINGS]_[Embedding]_[]_[새로운 학습 방식을 적용한 MTEB SOTA 모델, out of domain에서도 효과적이라고 함]_[].md",
-        "download_url":"blog/[20250304]_[CONTEXTUAL DOCUMENT EMBEDDINGS]_[Embedding]_[]_[새로운 학습 방식을 적용한 MTEB SOTA 모델, out of domain에서도 효과적이라고 함]_[].md"
+        "download_url":"/blog/[20250304]_[CONTEXTUAL DOCUMENT EMBEDDINGS]_[Embedding]_[]_[새로운 학습 방식을 적용한 MTEB SOTA 모델, out of domain에서도 효과적이라고 함]_[].md"
     },
     {
         "name": "[20250305]_[DeBERTa]_[Encoder]_[]_[마이크로소프트의 Encoder 모델(메타가 만든 RoBERTa 후속작)]_[].md",
-        "download_url": "blog/[20250305]_[DeBERTa]_[Encoder]_[]_[마이크로소프트의 Encoder 모델(메타가 만든 RoBERTa 후속작)]_[].md"
+        "download_url": "/blog/[20250305]_[DeBERTa]_[Encoder]_[]_[마이크로소프트의 Encoder 모델(메타가 만든 RoBERTa 후속작)]_[].md"
     },
     {
         "name": "[20250308]_[LIMO: Less is More for Reasoning]_[Synthetic]_[]_[LIMA 논문의 후속작 Reasoning 모델을 만드는 SFT 데이터셋]_[].md",
-        "download_url": "blog/[20250308]_[LIMO: Less is More for Reasoning]_[Synthetic]_[]_[LIMA 논문의 후속작 Reasoning 모델을 만드는 SFT 데이터셋]_[].md"
+        "download_url": "/blog/[20250308]_[LIMO: Less is More for Reasoning]_[Synthetic]_[]_[LIMA 논문의 후속작 Reasoning 모델을 만드는 SFT 데이터셋]_[].md"
     },
     {
         "name" : "[20250309]_[Chain-of-Thought Prompting Elicits Reasoning in Large Language Models]_[LLM]_[]_[구글의 CoT 초기 논문]_[].md",
-        "download_url" : "blog/[20250309]_[Chain-of-Thought Prompting Elicits Reasoning in Large Language Models]_[LLM]_[]_[구글의 CoT 초기 논문]_[].md"
+        "download_url" : "/blog/[20250309]_[Chain-of-Thought Prompting Elicits Reasoning in Large Language Models]_[LLM]_[]_[구글의 CoT 초기 논문]_[].md"
     },
     {
         "name" : "[20250312]_[COIL]_[Embedding]_[]_[Lexical search와 Embedding search의 합작]_[].md",
-        "download_url" : "blog/[20250312]_[COIL]_[Embedding]_[]_[Lexical search와 Embedding search의 합작]_[].md"
+        "download_url" : "/blog/[20250312]_[COIL]_[Embedding]_[]_[Lexical search와 Embedding search의 합작]_[].md"
     },
     {
         "name" : "[20250315]_[R1-Zero’s “Aha Moment” in Visual Reasoning on a 2B Non-SFT Model]_[LLM]_[]_[멀티모달을 딥시크 R1-Zero의 학습 방식으로 학습]_[].md",
-        "download_url" : "blog/[20250315]_[R1-Zero’s “Aha Moment” in Visual Reasoning on a 2B Non-SFT Model]_[LLM]_[]_[멀티모달을 딥시크 R1-Zero의 학습 방식으로 학습]_[].md"
+        "download_url" : "/blog/[20250315]_[R1-Zero’s “Aha Moment” in Visual Reasoning on a 2B Non-SFT Model]_[LLM]_[]_[멀티모달을 딥시크 R1-Zero의 학습 방식으로 학습]_[].md"
     },
     {
         "name" : "[20250316]_[Gemini Embedding: Generalizable Embeddings from Gemini]_[Embedding]_[]_[현 최강 임베딩 모델 Gemini Embedding]_[].md",
-        "download_url" : "blog/[20250316]_[Gemini Embedding: Generalizable Embeddings from Gemini]_[Embedding]_[]_[현 최강 임베딩 모델 Gemini Embedding]_[].md"
+        "download_url" : "/blog/[20250316]_[Gemini Embedding: Generalizable Embeddings from Gemini]_[Embedding]_[]_[현 최강 임베딩 모델 Gemini Embedding]_[].md"
     },
     {
         "name" : "[20250323]_[LADDER]_[LLM]_[]_[수학문제를 잘 푸는 모델 GRPO 학습과 어려운 문제를 단계별로 쪼개어 푸는 방법론]_[].md",

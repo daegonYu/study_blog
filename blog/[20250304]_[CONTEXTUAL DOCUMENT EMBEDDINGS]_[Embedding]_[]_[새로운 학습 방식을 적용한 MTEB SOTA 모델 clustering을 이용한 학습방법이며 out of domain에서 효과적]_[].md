@@ -4,33 +4,34 @@ https://arxiv.org/pdf/2410.02525
 
 ![image](https://github.com/user-attachments/assets/730f07e9-a2af-45ad-8096-e41673c0b916)
 
-## 🔹 핵심 요약
+## 핵심 요약
 
-### 🚀 기존 방식의 문제점
+### 1️⃣ 기존 방식의 문제점
 Biencoder 모델(예: DPR, GTR, Contriever 등)은 문서와 쿼리를 독립적으로 임베딩하므로 맥락 정보(context)가 반영되지 않음.
 
 통계적 검색 모델(BM25 등)은 IDF(Inverse Document Frequency) 등 전역적인 문서 통계를 활용하지만, 딥러닝 기반 dense embedding 모델들은 이런 정보를 학습하지 못함.
 
 결과적으로, 도메인 간 성능 편차(out-of-domain generalization)가 큼 → 한 도메인에서 훈련된 모델이 새로운 도메인에서 성능이 저하됨.
 
-## 🔥 논문의 주요 기여
+### 2️⃣ 논문의 주요 기여
 
 ✅ 문서 임베딩을 "맥락화(Contextualization)"하는 두 가지 방법 제안
 
-### 📌 새로운 contrastive learning 목표
+#### 📌 새로운 contrastive learning 목표
 문서 간 유사도를 학습할 때, 단순한 batch 내 contrastive loss 대신 유사한 문서를 클러스터링하여 훈련
 
 즉, 훈련 과정에서 비슷한 주제의 문서들을 함께 학습하여 문맥 정보를 반영하는 embedding을 형성
 
-### 📌 새로운 contextual architecture
+#### 📌 새로운 contextual architecture
 기존 BERT-style 인코더를 확장하여 주변 문서 정보를 함께 인코딩하는 구조 도입
 
 주변 문서 정보를 추가로 활용하여 보다 도메인에 적응적인(document-aware) 임베딩을 생성
 
 biencoder 구조를 유지하면서도 문맥 정보를 추가로 반영할 수 있도록 설계
 
+---
 
-## 🔹 논문 상세 분석
+## 세부 내용
 
 
 ### 1️⃣ 기본 개념: 기존 Biencoder vs CDE
@@ -47,16 +48,19 @@ CDE 방식:
 
 즉, M1에서 주변 문서들을 임베딩한 후, M2에서 최종 임베딩을 생성하는 2단계 프로세스
 
+---
+
 ### 2️⃣ Contextual Training (문맥을 반영한 contrastive learning)
 기존 contrastive learning은 random negative sampling을 사용하여 문서를 구분
 
-그러나, 이 방식은 특정 도메인에서는 중요한 단어(예: "NFL")가 너무 자주 등장해서 구분이 어려움
-
-#### 해결책:
+### **CDE 방식**
 문서를 의미적으로 유사한 클러스터로 그룹화하여 contrastive learning을 수행
 
 단순한 랜덤 negative sampling이 아니라 "문맥적으로 구별하기 어려운 문서들"을 함께 학습하는 방식
 
+(⚡ https://huggingface.co/dragonkue/snowflake-arctic-embed-l-v2.0-ko : 이와 같은 아이디어를 사용해서 학습되었다.)
+
+---
 
 ### 3️⃣ Contextual Document Encoder (CDE)
 - 2-Stage Encoding 구조
@@ -73,8 +77,9 @@ CDE 방식:
 
   Gradient Caching: 훈련 속도를 높이기 위한 최적화 기법 사용
 
+---
 
-## 🔹 실험 결과
+### 🔹 실험 결과
 
 ✅ 다양한 retrieval 벤치마크에서 기존 Biencoder 대비 성능 향상
 
@@ -86,7 +91,9 @@ MTEB 벤치마크에서 최고 성능을 기록 (250M 이하 모델 기준)
 
 → 즉, 기존 방법들이 필요했던 복잡한 학습 기법 없이도 효과적임
 
-## 🔹 논문의 핵심 기여와 의의
+---
+
+### 🔹 논문의 핵심 기여와 의의
 
 1. Dense Document Embedding을 Context-aware하게 확장
 
@@ -102,8 +109,9 @@ MTEB 벤치마크에서 최고 성능을 기록 (250M 이하 모델 기준)
 
 7. 기존에 필요했던 복잡한 hard negative sampling 없이도 성능 향상
 
+---
 
-## 🔹 결론 및 요약
+### 🔹 결론 및 요약
 
 ✅ 기존 biencoder 방식의 한계를 해결하는 새로운 Context-aware document embedding (CDE) 제안
 
@@ -113,8 +121,9 @@ MTEB 벤치마크에서 최고 성능을 기록 (250M 이하 모델 기준)
 
 ✅ 실제 검색 시스템 및 LLM 기반 RAG 모델에도 활용 가능
 
+---
 
-## Detail
+## 더 깊게 알아보기
 
 
 ### 1️⃣ False Negative Filtering (거짓 부정 샘플 제거)
@@ -138,6 +147,7 @@ Retrieval 시스템에서 negative sample(비슷하지 않은 문서)을 선정�
 
 ✅ 사전 학습된 임베딩 모델을 사용해 특정 문서가 false negative가 되는지 판단 후 제거.
 
+---
 
 ### 2️⃣ Batch Packing & Clustering 최적화
 
@@ -150,7 +160,7 @@ Retrieval 시스템에서 negative sample(비슷하지 않은 문서)을 선정�
  - 이 과정에서 batch 내 문서들이 서로 더 유사하도록 만들고, contrastive learning의 효과를 극대화.
 
    
-### ⚡ Packing 전략
+#### ⚡ Packing 전략
 batch 크기가 고정되어야 하는데, clustering 결과로 배치 크기가 다를 수 있음.
   
 이를 해결하기 위해:
@@ -163,6 +173,7 @@ batch 크기가 고정되어야 하는데, clustering 결과로 배치 크기가
 
 ✅ Greedy TSP 기반 batch packing 기법을 사용해 batch 크기를 조정하고, 훈련 샘플 간 유사성을 유지함.
 
+---
 
 ### 3️⃣ Two-Stage Gradient Caching (메모리 효율 최적화)
 
@@ -176,7 +187,7 @@ batch 크기가 고정되어야 하는데, clustering 결과로 배치 크기가
 2. M2 단계(최종 embedding을 생성하는 단계)
  - 여기서 backpropagation을 수행하여 메모리 사용량을 줄임.
 
-#### 💡 이 기법의 장점
+### **💡 이 기법의 장점**
 기존 contrastive learning보다 메모리를 절약하면서도, 큰 배치를 활용한 학습이 가능해짐.
 
 특히, contextual document embedding을 훈련할 때 추가적인 연산량을 최소화할 수 있음.
@@ -185,6 +196,7 @@ batch 크기가 고정되어야 하는데, clustering 결과로 배치 크기가
 
 ✅ M1과 M2 단계를 분리하여 일부 연산을 캐싱함으로써, 메모리를 아끼고 학습 속도를 최적화함.
 
+---
 
 ### 4️⃣ Implementation Details (구현 관련 추가 내용)
 논문에서는 실험 설정을 매우 구체적으로 설명함.
@@ -203,11 +215,15 @@ batch 크기가 고정되어야 하는데, clustering 결과로 배치 크기가
 
 ✅ NomicBERT 모델을 기반으로 학습을 수행하고, 다양한 하이퍼파라미터 튜닝을 진행.
 
-## 🔥 Detail 정리
+---
+
+## 세부내용 정리
 
 ### 📌 False Negative Filtering
 
  ✅ 기존 contrastive learning의 문제점(잘못된 negative sample 포함)을 해결하기 위해 filtering 기법을 추가
+
+---
 
 ### 📌 Batch Packing & Clustering 최적화
 
@@ -215,9 +231,13 @@ batch 크기가 고정되어야 하는데, clustering 결과로 배치 크기가
  
  ✅ Greedy Traveling Salesman 기반 batch packing 기법을 활용
 
+---
+
 ### 📌 Two-Stage Gradient Caching (메모리 최적화 기법)
  
  ✅ 훈련 과정에서 gradient caching을 적용해 메모리 사용량을 절감
+
+---
 
 ### 📌 Implementation 세부 정보
 

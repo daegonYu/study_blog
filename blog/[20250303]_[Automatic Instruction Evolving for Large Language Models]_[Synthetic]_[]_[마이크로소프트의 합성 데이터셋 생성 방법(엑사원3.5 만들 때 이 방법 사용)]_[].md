@@ -32,7 +32,7 @@ Auto Evol-Instruct는 두 가지 주요 LLM을 활용합니다.
 1. **Evol LLM**: 실제 데이터를 변형시키는 역할
 2. **Optimizer LLM**: Evol LLM이 생성한 데이터를 분석하고, **더 나은 변형 방법을 설계**하는 역할
 
-### 자동화 과정
+### **자동화 과정**
 
 1. **초기 변형 방법 설계 (Initial Evolving Method Design)**
     - 사람이 직접 규칙을 설계하는 대신, **Evol LLM이 데이터를 분석하여** 스스로 변형 규칙을 생성함.
@@ -197,12 +197,12 @@ Optimizer LLM이 항상 **완벽한 피드백을 제공하는 것은 아님**.
 
 이 섹션에서는 **최적화 횟수(optimization steps)가 Auto Evol-Instruct의 성능에 미치는 영향을 분석**합니다.
 
-### 실험 설정
+### **실험 설정**
 
 - **GSM8K 데이터셋**을 사용하여 최적화 횟수가 결과에 미치는 영향을 테스트.
 - Auto Evol-Instruct의 기본 하이퍼파라미터를 유지하면서 **최적화 횟수(optimization steps)를 조절**.
 
-### 실험 결과
+### **실험 결과**
 
 ### **1. 최적화 횟수가 증가하면 성능이 향상됨**
 

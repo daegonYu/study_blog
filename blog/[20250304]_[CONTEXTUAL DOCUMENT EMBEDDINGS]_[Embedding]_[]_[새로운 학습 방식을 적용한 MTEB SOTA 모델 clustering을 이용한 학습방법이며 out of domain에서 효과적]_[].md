@@ -159,8 +159,7 @@ Retrieval 시스템에서 negative sample(비슷하지 않은 문서)을 선정�
  - 이후, 같은 클러스터 내에서 training batch를 구성.
  - 이 과정에서 batch 내 문서들이 서로 더 유사하도록 만들고, contrastive learning의 효과를 극대화.
 
-   
-#### ⚡ Packing 전략
+### **Packing 전략**
 batch 크기가 고정되어야 하는데, clustering 결과로 배치 크기가 다를 수 있음.
   
 이를 해결하기 위해:

@@ -8,8 +8,7 @@ https://arxiv.org/html/2406.00770v1#abstract
 논문 **"Automatic Instruction Evolving for Large Language Models"**(Weihao Zeng et al., Microsoft)의 핵심 내용을 쉽게 이해할 수 있도록 설명해드리겠습니다.
 
 ---
-
-## **1. 논문의 주요 내용**
+# 개요
 
 ### **기존 문제점**
 
@@ -24,15 +23,16 @@ https://arxiv.org/html/2406.00770v1#abstract
 - 기존 수작업으로 설계된 방법(Evol-Instruct)보다 성능이 더 뛰어난 Instruction 데이터를 생성할 수 있음을 실험적으로 검증했습니다.
 
 ---
+# 세부사항
 
-## **2. Auto Evol-Instruct의 동작 원리**
+## 2. Auto Evol-Instruct의 동작 원리
 
 Auto Evol-Instruct는 두 가지 주요 LLM을 활용합니다.
 
 1. **Evol LLM**: 실제 데이터를 변형시키는 역할
 2. **Optimizer LLM**: Evol LLM이 생성한 데이터를 분석하고, **더 나은 변형 방법을 설계**하는 역할
 
-### **자동화 과정**
+### 자동화 과정
 
 1. **초기 변형 방법 설계 (Initial Evolving Method Design)**
     - 사람이 직접 규칙을 설계하는 대신, **Evol LLM이 데이터를 분석하여** 스스로 변형 규칙을 생성함.
@@ -48,11 +48,11 @@ Auto Evol-Instruct는 두 가지 주요 LLM을 활용합니다.
 
 ---
 
-## **3. 실험 결과**
+## 3. 실험 결과
 
 Auto Evol-Instruct는 **사람이 설계한 방법보다 더 좋은 데이터 변형을 수행할 수 있음**을 실험적으로 검증했습니다.
 
-### **주요 성능 비교**
+### 주요 성능 비교
 
 | 모델 | Instruction Following (MT-Bench) | 수학 (GSM8K) | 코드 생성 (HumanEval) |
 | --- | --- | --- | --- |
@@ -66,7 +66,7 @@ Auto Evol-Instruct는 **사람이 설계한 방법보다 더 좋은 데이터 �
 
 ---
 
-## **4. 논문의 핵심 포인트 정리**
+## 4. 논문의 핵심 포인트 정리
 
 - **기존 문제**: Instruction 데이터 변형을 위해 사람이 직접 규칙을 설계해야 했음 → **비효율적**
 - **제안 방법**: Auto Evol-Instruct → LLM이 스스로 **최적의 변형 방법을 찾아냄**
@@ -75,22 +75,22 @@ Auto Evol-Instruct는 **사람이 설계한 방법보다 더 좋은 데이터 �
 
 ---
 
-## **5. 연구의 의미와 한계**
+## 5. 연구의 의미와 한계
 
-### **의미**
+### 의미
 
 - Instruction 데이터를 **자동으로** 발전시키는 방법을 개발하여, **새로운 작업에도 쉽게 확장 가능**.
 - **Evol-Instruct보다 성능이 뛰어나고, 사람이 개입할 필요 없음**.
 - **더 적은 데이터로도 GPT-3.5 수준 성능을 낼 수 있음** → 학습 비용 절감 가능.
 
-### **한계**
+### 한계
 
 - Optimizer LLM의 성능에 의존 → **최적화 과정이 지나치면 성능이 하락할 수도 있음**.
 - 특정 Task(예: 코드 생성, 수학 문제 해결)에서만 검증됨 → **더 다양한 Task에 대한 확장 연구 필요**.
 
 ---
 
-## **6. 결론**
+## 6. 결론
 
 Auto Evol-Instruct는 **LLM을 자동으로 발전시키는 방법을 찾아내는 프레임워크**로,
 
@@ -106,20 +106,20 @@ Auto Evol-Instruct는 **LLM을 자동으로 발전시키는 방법을 찾아내�
 
 ---
 
-# Details
+# 더 깊게 알아보기
 
-## **3.2 Evol Trajectory Analysis (진화 과정 분석)**
+## 3.2 Evol Trajectory Analysis (진화 과정 분석)
 
 Auto Evol-Instruct의 목표는 **최적의 Instruction 데이터 변형 방법을 찾는 것**입니다.
 
 이 과정에서 **Optimizer LLM**이 핵심 역할을 합니다.
 
-### **✅ 핵심 개념**
+### 핵심 개념
 
 - **Optimizer LLM**: Evol LLM이 수행한 데이터 변형을 분석하여 문제점을 찾고 피드백을 제공합니다.
 - 변형 과정에서 잘못된 점을 찾아, 다음 변형 과정에서 개선할 수 있도록 합니다.
 
-### **✅ Evol Trajectory (진화 경로)**
+### Evol Trajectory (진화 경로)
 
 1. **초기 데이터 집합** Xt를 Evol LLM이 변형하기 시작.
 2. Evol LLM이 **l번의 변형**을 수행하여 새로운 데이터셋을 생성:
@@ -132,22 +132,20 @@ St={Xt,Xt(1),Xt(2),...,Xt(l)}
 
 ---
 
-## **3.3 Evolving Method Optimization (변형 방법 최적화)**
+## 3.3 Evolving Method Optimization (변형 방법 최적화)
 
-### **✅ 핵심 개념**
+### 핵심 개념
 
 - **Optimizer LLM**이 제공한 피드백을 이용하여 변형 방법을 개선하는 과정.
 - 최적화된 변형 방법을 찾아 **점점 더 나은 데이터셋을 생성할 수 있도록 함**.
 
-### **✅ 과정**
+### 과정
 
 1. **피드백 활용**: 이전 변형 방법 et−1을 피드백 ft을 반영하여 개선.
 2. **새로운 변형 방법 생성**: 최적화된 변형 방법 et를 생성.
 3. **반복 수행**: 여러 번 최적화를 거쳐 점점 더 나은 방법을 찾음.
 
----
-
-### **✅ Multiple Optimizations (다중 최적화)**
+### Multiple Optimizations (다중 최적화)
 
 Optimizer LLM이 항상 **완벽한 피드백을 제공하는 것은 아님**.
 
@@ -164,7 +162,7 @@ Optimizer LLM이 항상 **완벽한 피드백을 제공하는 것은 아님**.
     - F(r) = 변형이 실패했으면 1, 성공했으면 0.
     - D = 평가용 데이터셋.
 
-### **✅ 실패한 변형 예시**
+### **실패한 변형 예시**
 
 - 모델이 단순히 **"Understood"** 또는 **"Thank you?"** 같은 응답을 하면 **변형이 실패한 것**으로 판단.
 - 변형이 제대로 된 경우에는 **더 복잡한 질문이나 상세한 응답이 생성되어야 함**.
@@ -173,7 +171,7 @@ Optimizer LLM이 항상 **완벽한 피드백을 제공하는 것은 아님**.
 
 ---
 
-## **3.4 Instruction Tuning on Evolved Data (진화된 데이터로 모델 학습)**
+## 3.4 Instruction Tuning on Evolved Data (진화된 데이터로 모델 학습)
 
 최적의 변형 방법 e∗이 결정되면, 이를 전체 데이터셋에 적용하여 **새로운 고품질 데이터셋을 생성**합니다.
 
@@ -183,9 +181,7 @@ Optimizer LLM이 항상 **완벽한 피드백을 제공하는 것은 아님**.
 
 ➡ **이 자동화된 방법을 통해, 더 좋은 Instruction 데이터셋을 만들고, 모델을 더욱 정교하게 학습할 수 있음**.
 
----
-
-## **🔍 핵심 요약**
+### 🔍 핵심 요약
 
 | 단계 | 설명 |
 | --- | --- |
@@ -197,20 +193,16 @@ Optimizer LLM이 항상 **완벽한 피드백을 제공하는 것은 아님**.
 
 ---
 
-### **5.2 다중 최적화(Multiple Optimizations)의 효과 분석**
+## 5.2 다중 최적화(Multiple Optimizations)의 효과 분석
 
 이 섹션에서는 **최적화 횟수(optimization steps)가 Auto Evol-Instruct의 성능에 미치는 영향을 분석**합니다.
 
----
-
-## **✅ 실험 설정**
+### 실험 설정
 
 - **GSM8K 데이터셋**을 사용하여 최적화 횟수가 결과에 미치는 영향을 테스트.
 - Auto Evol-Instruct의 기본 하이퍼파라미터를 유지하면서 **최적화 횟수(optimization steps)를 조절**.
 
----
-
-## **✅ 실험 결과**
+### 실험 결과
 
 ### **1. 최적화 횟수가 증가하면 성능이 향상됨**
 
@@ -221,8 +213,6 @@ Optimizer LLM이 항상 **완벽한 피드백을 제공하는 것은 아님**.
 
 - 최적화 횟수가 늘어나면 **Optimizer LLM이 더 다양한 변형 방법을 탐색**할 수 있음.
 - 즉, **더 나은 Instruction 변형 방법을 찾을 가능성이 커짐**.
-
----
 
 ### **2. 과도한 최적화는 성능 저하를 유발**
 
@@ -235,9 +225,7 @@ Optimizer LLM이 항상 **완벽한 피드백을 제공하는 것은 아님**.
     - 불필요한 정보가 Instruction 변형 방법에 축적되면서 **오히려 최적화 효과가 줄어듦**.
     - 최적화가 많아질수록 **Instruction이 과하게 복잡해지거나 불필요한 변화가 추가될 수 있음**.
 
----
-
-## **✅ 최적화 횟수와 성능 간의 트레이드오프**
+## **최적화 횟수와 성능 간의 트레이드오프**
 
 | 최적화 횟수 | 효과 |
 | --- | --- |
@@ -257,9 +245,7 @@ Optimizer LLM이 항상 **완벽한 피드백을 제공하는 것은 아님**.
 - 연산 비용(Resource Consumption)이 증가하여 **학습 비용이 커짐**.
 - 불필요한 정보가 누적되면서 **Instruction 변형이 비효율적으로 복잡해질 가능성**.
 
----
-
-## **🔍 핵심 요약**
+### 🔍 핵심 요약
 
 - 최적화 횟수가 **1에서 9로 증가하면 성능이 개선**됨.
 - 하지만 **12회를 초과하면 성능이 저하**됨 (과최적화 문제).
@@ -267,13 +253,12 @@ Optimizer LLM이 항상 **완벽한 피드백을 제공하는 것은 아님**.
 
 ---
 
-### **5.5 데이터셋의 복잡성과 다양성(Complexity and Diversity)의 중요성**
+## **5.5 데이터셋의 복잡성과 다양성(Complexity and Diversity)의 중요성**
 
 이 섹션에서는 **Instruction 데이터의 복잡성과 다양성이 모델 성능에 미치는 영향**을 분석합니다.
 
----
 
-## **✅ 핵심 개념**
+### **핵심 개념**
 
 1. **데이터셋의 복잡성과 다양성이 증가하면 LLM의 성능이 향상된다.**
     - Liu et al. (2023b): 모델 정렬(Model Alignment)에 있어 데이터 복잡성과 다양성이 중요한 역할을 한다고 강조.
@@ -285,9 +270,7 @@ Optimizer LLM이 항상 **완벽한 피드백을 제공하는 것은 아님**.
         - **다양성(Diversity):** 각 데이터의 **고유 태그 수(Unique tags)의 평균값**.
         - **복잡성(Complexity):** **각 데이터의 태그 개수 평균값**.
 
----
-
-## **✅ 실험 결과**
+### **실험 결과**
 
 | 방법 | 다양성(Diversity) | 복잡성(Complexity) | HumanEval 성능 |
 | --- | --- | --- | --- |
@@ -302,9 +285,7 @@ Optimizer LLM이 항상 **완벽한 피드백을 제공하는 것은 아님**.
 
 ➡ **즉, 데이터의 다양성과 복잡성을 증가시키면 LLM의 성능이 향상됨을 확인!** 🚀
 
----
-
-## **✅ 결론**
+### **🔍 핵심 요약**
 
 - **Instruction 데이터셋의 다양성과 복잡성을 증가시키면 모델 성능이 개선된다.**
 - **Auto Evol-Instruct는 기존 Evol-Instruct보다도 데이터의 복잡성과 다양성을 효과적으로 높일 수 있다.**
@@ -313,15 +294,15 @@ Optimizer LLM이 항상 **완벽한 피드백을 제공하는 것은 아님**.
 **즉, 단순히 많은 데이터를 학습하는 것보다, "다양하고 복잡한 데이터"를 학습하는 것이 훨씬 더 효과적임을 입증한 실험!** 🚀
 
 ---
+# 부록
 
 ![image](https://github.com/user-attachments/assets/283ac24f-04b4-4330-b444-3d72e68f8b7a)
 
 
 이미지에서 **"Prompt for Evol Trajectory Analysis"**라는 제목과 함께 **Optimizer LLM이 Instruction Evolution 과정에서 실패한 사례를 식별하는 프롬프트**가 포함되어 있습니다.
 
----
 
-### **📌 이미지의 핵심 내용**
+### **핵심 내용**
 
 - **Evol Trajectory Analysis 프롬프트**는 Evol LLM이 수행한 Instruction 변형이 적절했는지 평가하는 과정에서 사용됩니다.
 - **Optimizer LLM이 분석해야 할 요소**:
@@ -335,17 +316,13 @@ Optimizer LLM이 항상 **완벽한 피드백을 제공하는 것은 아님**.
     → Optimizer LLM에게 **진화에 실패한 사례를 식별하도록 요청**하는 부분.
     
 
----
-
-### **📌 이 프롬프트의 역할**
+### **이 프롬프트의 역할**
 
 - Evol LLM이 생성한 데이터 중 **제대로 변형되지 않았거나 복잡성이 증가하지 않은 경우**를 탐색.
 - 이러한 실패 사례를 분석하여 **Evolving Method 최적화 과정(3.3절)에서 피드백을 제공**.
 - 이후 **Multiple Optimizations(다중 최적화, 3.3절) 과정에서 더 나은 변형 방법을 찾아가는 데 활용**.
 
----
-
-### **📌 결론**
+### **🔍 핵심 요약**
 
 이 프롬프트는 **Auto Evol-Instruct에서 Evol LLM이 수행한 변형이 적절했는지를 판단하는 핵심 요소**입니다.
 
@@ -356,20 +333,16 @@ Optimizer LLM이 실패 사례를 분석하고 이를 바탕으로 **Instruction
 ![image](https://github.com/user-attachments/assets/ba994f55-74e6-4fcd-ba9f-2d303e546229)
 
 
-### **📌 이미지 분석: Prompt for Evolving Method Optimization**
+### **Prompt for Evolving Method Optimization**
 
----
-
-## **✅ 핵심 내용**
+### **핵심 내용**
 
 이 이미지는 **Auto Evol-Instruct 프레임워크에서 "Evolving Method Optimization(변형 방법 최적화)" 단계에서 사용되는 프롬프트**를 보여줍니다.
 
 - **프롬프트 제목**: "Prompt For Evolving Method Optimization"→ **Evol-Instruct 변형 방법을 최적화하기 위한 프롬프트**
 - **프롬프트 내용**:*"You need to optimize this method based on the feedback from the evolution failure case."*→ **이전 단계(Evol Trajectory Analysis)에서 발생한 실패 사례를 기반으로 변형 방법을 최적화해야 함**.
 
----
-
-## **✅ 역할 및 기능**
+### **역할 및 기능**
 
 1. **진화 실패(Failure Case) 피드백 반영**
     - 이전 단계에서 **Optimizer LLM이 진화 실패 사례를 분석**했음.
@@ -381,9 +354,7 @@ Optimizer LLM이 실패 사례를 분석하고 이를 바탕으로 **Instruction
     - 이 과정을 반복하면 점점 더 나은 Instruction 변형 방법을 찾을 수 있음.
     - 최종적으로 **가장 낮은 실패율을 가진 최적의 변형 방법이 선택됨**.
 
----
-
-## **✅ 전체 프로세스에서 이 프롬프트의 위치**
+### **전체 프로세스에서 이 프롬프트의 위치**
 
 | 단계 | 설명 |
 | --- | --- |
@@ -392,9 +363,8 @@ Optimizer LLM이 실패 사례를 분석하고 이를 바탕으로 **Instruction
 | **3. Evolving Method Optimization (변형 방법 최적화, 이 단계)** | 실패 사례를 기반으로 변형 방법을 개선 |
 | **4. 반복 수행 → 최적의 변형 방법 찾기** | 성능이 가장 좋은 변형 방법을 최종 선택 |
 
----
 
-## **✅ 결론**
+### **🔍 핵심 요약**
 
 - **이 프롬프트는 Auto Evol-Instruct가 지속적으로 발전할 수 있도록 하는 핵심 요소**.
 - **실패 사례를 반영하여 Instruction 변형 방법을 점진적으로 개선하는 역할**.

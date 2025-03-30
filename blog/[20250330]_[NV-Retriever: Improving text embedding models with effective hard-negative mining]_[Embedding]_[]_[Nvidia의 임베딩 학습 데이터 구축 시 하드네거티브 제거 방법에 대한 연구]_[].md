@@ -15,23 +15,23 @@ https://arxiv.org/html/2407.15831v2
 | False Negative | 실제로는 정답인데 Negative로 잘못 분류된 경우 |
 | Positive-aware Mining | Positive 점수를 기준으로 잘못된 Negative를 제거하는 방법 |
 
-### 1.1 이 논문의 주된 연구 내용
+#### 1.1 이 논문의 주된 연구 내용
 
 - 임베딩 모델은 보통 **Contrastive Learning** 방식으로 학습되며, 이때 **Hard-Negative 샘플 선택**이 성능 향상에 매우 중요
 - 본 논문은 효과적인 **Hard-Negative 샘플 선택 방법에 대한 연구 논문**
 
 ---
 
-### 1.2 기존 문제점
+#### 1.2 기존 문제점
 
 - 기존 연구에서는 **Hard-Negative Mining 기법 자체에 대한 분석이나 설명은 부족**했습니다.
 - **Hard-Negative 샘플링 시** 잘못된 Negative (사실은 Positive인 샘플)가 들어갈 경우 학습을 방해할 수 있음.
 
 ---
 
-### 1.3 주요 기여 (논문의 핵심 Contribution)
+#### 1.3 주요 기여 (논문의 핵심 Contribution)
 
-### (1) **Positive-aware Hard-negative Mining** 기법 제안
+### (1) **Positive-aware Hard-negative Mining 기법 제안**
 
 → Positive의 유사도 점수를 기준(anchor)으로 삼아 **False Negative를 제거**하고, contrastive learning 효율을 높이는 방법 제안
 
@@ -50,13 +50,13 @@ https://arxiv.org/html/2407.15831v2
 ## 2. Background
 
 
-### 2.1 Text Embedding Models
+#### 2.1 Text Embedding Models
 
 **텍스트 임베딩 모델이란?**
 
 → 다양한 길이의 텍스트를 고정된 차원의 벡터로 바꿔주는 모델. 검색, 추천, 의미 유사도 등 다양한 작업에 사용됨.
 
-### 🔹 주요 발전 흐름:
+####🔹 주요 발전 흐름
 
 - **Sentence-BERT (2019)**
     
@@ -97,7 +97,7 @@ https://arxiv.org/html/2407.15831v2
     → Pre-training 단계를 사용하는 이유 : Pre-training 단계에서 autoregressive generation을 encoding으로 매개변수 조정의 목적이 있다.
     
 
-### 🔹 평가 벤치마크:
+#### 🔹 평가 벤치마크
 
 - **BEIR (2021)**
     
@@ -112,13 +112,13 @@ https://arxiv.org/html/2407.15831v2
 
 ---
 
-### 2.2 Hard-Negative Mining for Fine-tuning
+#### 2.2 Hard-Negative Mining for Fine-tuning
 
 Contrastive Learning에서는 (query, positive, negative)의 **triplet**이 필요
 
 → 이때 “negative”가 **얼마나 어려운(hard)** 샘플이냐가 학습 품질에 큰 영향을 줌
 
-### 🔹 Negative 샘플링 방식
+### **🔹 Negative 샘플링 방식**
 
 - **In-Batch Negative**
     
@@ -141,7 +141,7 @@ Contrastive Learning에서는 (query, positive, negative)의 **triplet**이 필�
 
 ---
 
-### 🔍 False Negatives 문제
+#### 🔍 False Negatives 문제
 
 > “Query와 매우 유사한 문서 중 일부는 실제로 Positive일 수도 있다.”
 > 
@@ -152,14 +152,14 @@ Contrastive Learning에서는 (query, positive, negative)의 **triplet**이 필�
     → 해결: 유사도 점수가 높은 문서는 제거하거나 denoise
     
 
-### 기존의 해결법
+#### 기존의 해결법
 
 - **Cross-Encoder로 필터링** (RocketQA 등)
 - **LLM으로 relevance score 판단**
 - 문제: 대규모 데이터에 쓰기엔 비용 큼 (모든 쿼리-문서 쌍에 대해 추론 필요)
 - **Snowflake-arctic-embed-l**: threshold 조절 (e.g. 점수 0.4, 0.5, 0.8) 실험
 
-### 이 논문을 읽기 전 나의 해결법
+#### 이 논문을 읽기 전 나의 해결법
 
 - **Snowflake 논문(**https://arxiv.org/html/2405.05374v1)**을 참고(부록 부분)**하여 Retriever 모델의 threshold 조절 (e.g. 점수 0.4, 0.5, 0.8)을 통한 필터링
 - 이 논문에서 말하는 기존의 방법들을 사용
@@ -171,12 +171,12 @@ Contrastive Learning에서는 (query, positive, negative)의 **triplet**이 필�
 
 ### **3.1 Positive-aware Hard-negative Mining Methods**
 
-### 🔸 배경 요약
+#### 🔸 배경 요약
 
 - Contrastive Learning에서는 query와 positive를 가깝게, negative는 멀게 만들도록 학습함.
 - 일반적으로 **Top-K 가장 유사한 문서들**을 negative로 선택하는데, 이 방식은 **False Negative(실제로는 정답인데 label이 없음)**를 포함할 위험이 큼.
 
-### 🔸 기존 방법들 요약
+#### 🔸 기존 방법들 요약
 
 | 기법 | 설명 | 한계 |
 | --- | --- | --- |
@@ -185,27 +185,27 @@ Contrastive Learning에서는 (query, positive, negative)의 **triplet**이 필�
 
 ---
 
-### 🌟 **저자들의 제안: Positive-aware Mining**
+#### 🌟 **저자들의 제안: Positive-aware Mining**
 
 → **Positive passage의 유사도 점수(`sim(q, d⁺)`)를 기준(anchor)**으로 활용해
 
 False Negative 가능성이 높은 negative를 제거하는 방식
 
-### 핵심 아이디어:
+#### 핵심 아이디어:
 
 > “Positive 점수보다 너무 유사한 Negative는 False Negative일 수 있으니 제외하자.”
 > 
 
 ---
 
-### 🔧 제안된 두 가지 필터 방식:
+#### 🔧 제안된 두 가지 필터 방식:
 
 | 방법 | 설명 | 유사도 임계값 기준 |
 | --- | --- | --- |
 | **TopK-MarginPos** | `Negative < Positive - margin` | 절대값 margin (예: 0.2 이상 차이) |
 | **TopK-PercPos** | `Negative < Positive * percentage` | 비율 margin (예: 90% 이하면 통과) |
 
-### 📌 알고리즘 구조 (의사 코드 형태)
+#### 📌 알고리즘 구조 (의사 코드 형태)
 
 ```python
 # q : query, p : positive, n : negative
@@ -216,13 +216,13 @@ for n in top_k_negatives:
 
 → 또는 `sim(n, q) < sim(p, q) * 0.9` (TopK-PercPos)
 
-### 장점
+#### 장점
 
 - Positive score를 기준으로 false negative를 걸러낼 수 있음
 
 ---
 
-### **3.2 Research Questions**
+#### **3.2 Research Questions**
 
 이 논문은 아래 세 가지 연구 질문(RQ)을 실험을 통해 검증합니다:
 
@@ -234,9 +234,9 @@ for n in top_k_negatives:
 
 ---
 
-### 3.3 **Experiments Setup**
+#### 3.3 **Experiments Setup**
 
-### 3.3.1 Training
+#### 3.3.1 Training
 
 - Base model: `e5-large-unsupervised` 또는 `Mistral-7B-v0.1`
 - 학습 데이터셋 (총 287k 쿼리):
@@ -244,7 +244,7 @@ for n in top_k_negatives:
     - StackExchange (2023 덤프)
     - SQuAD
 
-### 3.3.2 Evaluation
+#### 3.3.2 Evaluation
 
 - 평가 데이터셋 (BEIR / MTEB 중 일부):
     - NQ
@@ -260,15 +260,15 @@ for n in top_k_negatives:
 ## 4. 실험 결과 및 해석 요약
 
 
-### **4.1 RQ1: 서로 다른 teacher model로 mining할 경우 결과는?**
+#### **4.1 RQ1: 서로 다른 teacher model로 mining할 경우 결과는?**
 
-### 🔍 실험 개요
+#### 🔍 실험 개요
 
 - 동일한 base 모델: `e5-large-unsupervised`
 - 동일한 학습 데이터셋에 대해 **서로 다른 teacher 모델**을 사용해 hard-negative 4개씩 mining
 - 그 결과를 가지고 base 모델을 fine-tune → 성능 비교 (NDCG@10 기준)
 
-### 🧠 사용된 teacher 모델들:
+#### 🧠 사용된 teacher 모델들:
 
 | 모델명 | 특징 |
 | --- | --- |
@@ -279,7 +279,7 @@ for n in top_k_negatives:
 | **e5-mistral-7b-instruct** | Mistral 기반 디코더 모델 (7B) |
 | **NV-Embed-v1** | Mistral + Bi-directional attention 구조 (7.8B) |
 
-### 📊 실험 결과 요약
+#### 📊 실험 결과 요약
 
 - **BM25로 뽑은 하드네거티브가 가장 성능이 낮음**
     
@@ -299,14 +299,14 @@ for n in top_k_negatives:
 
 ---
 
-### **4.2 RQ2: 여러 teacher model의 hard-negative를 ensemble하면 더 좋을까?**
+#### 4.2 RQ2: 여러 teacher model의 hard-negative를 ensemble하면 더 좋을까?
 
-### 실험 동기
+#### 실험 동기
 
 - 서로 다른 teacher 모델들이 뽑아내는 hard-negative가 **겹치는 게 거의 없음 (Jaccard 유사도 < 30%)**
 - → 서로 다른 관점에서 추출된 hard-negative를 섞어보면 성능 향상 가능성 있음
 
-### 🔍 Ensemble 방법 두 가지
+#### 🔍 Ensemble 방법 두 가지
 
 | 방법 | 설명 |
 | --- | --- |
@@ -316,13 +316,13 @@ for n in top_k_negatives:
     - **dedup:** 중복 제거 + 다음 순위 negative로 대체
     - **no-dedup:** 중복 그대로 사용
 
-### 📊 결과 요약 (Table 2)
+#### 📊 결과 요약 (Table 2)
 
 - **Cross-sample**: baseline보다 못함 → 성능 X
 - **Intra-sample (dedup)**: baseline보다 약간 향상
 - **Intra-sample (no-dedup)**: **가장 성능 우수**
 
-### 🔎 왜 no-dedup이 더 좋았을까?
+#### 🔎 왜 no-dedup이 더 좋았을까?
 
 > “만약 여러 teacher가 같은 문서를 hard-negative로 선택했다면,
 > 
@@ -344,9 +344,9 @@ for n in top_k_negatives:
 
 ---
 
-### **4.3** RQ3: Mining 방법별 성능 비교
+#### 4.3 RQ3: Mining 방법별 성능 비교
 
-### 🔬 4.3.1. Ablation 실험 (마진/임계값 설정 실험)
+#### 🔬 4.3.1. Ablation 실험 (마진/임계값 설정 실험)
 
 | 방법 | 실험 설정 | 최적 성능 조건 | 성능 요약 |
 | --- | --- | --- | --- |
@@ -357,12 +357,12 @@ for n in top_k_negatives:
 
 ---
 
-### 🎯 4.3.2. Sampling 전략
+#### 🎯 4.3.2. Sampling 전략
 
 - **Sampled Top-K**: top-k 중 무작위 샘플링
 - **Top-1 + Sampled**: 가장 상위 1개는 고정하고, 나머지는 무작위 샘플링
 
-### 실험 결과:
+#### 실험 결과:
 
 - `Top-1+Sampled` 방식이 더 안정적
 - `k=10`까지만 성능 향상, 그 이상은 성능 하락
@@ -376,7 +376,7 @@ for n in top_k_negatives:
 
 ---
 
-### 🥇 4.3.3. Mining 방법 최종 비교 (Base: e5-large-unsupervised, 334M)
+#### 🥇 4.3.3. Mining 방법 최종 비교 (Base: e5-large-unsupervised, 334M)
 
 | Mining Method | 요약 | 결과 |
 | --- | --- | --- |
@@ -393,7 +393,7 @@ for n in top_k_negatives:
 
 ---
 
-### 💪 4.3.4. 대형 모델(Mistral-7B-v0.1, 7.1B)로 일반화 실험
+#### 💪 4.3.4. 대형 모델(Mistral-7B-v0.1, 7.1B)로 일반화 실험
 
 - 각 쿼리당 **hard-negative 1개**만 사용 (메모리 제한)
 - 앞서 찾은 best config들 그대로 사용
@@ -403,9 +403,9 @@ for n in top_k_negatives:
 
 ---
 
-### **4.4** RQ3b: NV-Retriever-v1 규모로 확장 실험
+#### 4.4 RQ3b: NV-Retriever-v1 규모로 확장 실험
 
-### 실험 조건
+#### 실험 조건
 
 - Base 모델: **Mistral-7B-v0.1**
 - Teacher 모델: **E5-Mistral-7B**

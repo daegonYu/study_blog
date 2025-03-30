@@ -31,15 +31,15 @@ https://arxiv.org/html/2407.15831v2
 
 #### 1.3 주요 기여 (논문의 핵심 Contribution)
 
-### (1) **Positive-aware Hard-negative Mining 기법 제안**
+### **(1) Positive-aware Hard-negative Mining 기법 제안**
 
 → Positive의 유사도 점수를 기준(anchor)으로 삼아 **False Negative를 제거**하고, contrastive learning 효율을 높이는 방법 제안
 
-### (2) **Hard-negative Mining 기법에 대한 구성별 비교 연구**
+### **(2) Hard-negative Mining 기법에 대한 구성별 비교 연구**
 
 → Teacher 모델, base 모델 조합을 다양하게 바꾸며 어떤 방식이 효과적인지 **ablation study** 수행
 
-### (3) **대규모 성능 검증: NV-Retriever-v1**
+### **(3) 대규모 성능 검증: NV-Retriever-v1**
 
 → 제안 기법을 실제로 적용해 **MTEB Retrieval 벤치마크 1위 모델(NV-Retriever-v1)** 개발
 

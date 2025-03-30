@@ -169,7 +169,7 @@ Contrastive Learning에서는 (query, positive, negative)의 **triplet**이 필�
 ## 3. Methodology
 
 
-### **3.1 Positive-aware Hard-negative Mining Methods**
+#### 3.1 Positive-aware Hard-negative Mining Methods
 
 #### 🔸 배경 요약
 
@@ -191,7 +191,7 @@ Contrastive Learning에서는 (query, positive, negative)의 **triplet**이 필�
 
 False Negative 가능성이 높은 negative를 제거하는 방식
 
-#### 핵심 아이디어:
+#### 핵심 아이디어
 
 > “Positive 점수보다 너무 유사한 Negative는 False Negative일 수 있으니 제외하자.”
 > 
@@ -222,7 +222,7 @@ for n in top_k_negatives:
 
 ---
 
-#### **3.2 Research Questions**
+#### 3.2 Research Questions
 
 이 논문은 아래 세 가지 연구 질문(RQ)을 실험을 통해 검증합니다:
 
@@ -234,7 +234,7 @@ for n in top_k_negatives:
 
 ---
 
-#### 3.3 **Experiments Setup**
+#### 3.3 Experiments Setup
 
 #### 3.3.1 Training
 
@@ -260,7 +260,7 @@ for n in top_k_negatives:
 ## 4. 실험 결과 및 해석 요약
 
 
-#### **4.1 RQ1: 서로 다른 teacher model로 mining할 경우 결과는?**
+#### 4.1 RQ1: 서로 다른 teacher model로 mining할 경우 결과는?
 
 #### 🔍 실험 개요
 

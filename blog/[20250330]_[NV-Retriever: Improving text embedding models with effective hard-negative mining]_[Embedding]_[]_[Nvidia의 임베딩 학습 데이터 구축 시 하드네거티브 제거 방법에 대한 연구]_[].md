@@ -388,7 +388,8 @@ for n in top_k_negatives:
 
 → **결론:** Positive-aware 방식이 **FN(False Negative)을 효율적으로 제거해 가장 효과적인 contrastive 학습을 유도**
 
-![image.png](attachment:7251f01b-037d-40d6-9e8b-6272264cca83:image.png)
+<img src="https://github.com/user-attachments/assets/81e59e33-789a-4fd1-9e33-9ba691f38c9e" width="600"/>
+
 
 ---
 
@@ -398,7 +399,7 @@ for n in top_k_negatives:
 - 앞서 찾은 best config들 그대로 사용
 - **TopK-PercPos**가 Mistral에서도 **최고 성능**
 
-![image.png](attachment:9e51b286-431e-4b07-b857-94e15065c3f5:image.png)
+<img src="https://github.com/user-attachments/assets/6e203c1b-ce72-451f-ac6a-abea0e743c1d" width="800"/>
 
 ---
 

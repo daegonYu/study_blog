@@ -207,14 +207,24 @@ False Negative 가능성이 높은 negative를 제거하는 방식
 
 #### 📌 알고리즘 구조 (의사 코드 형태)
 
+- q : query, p : positive, n : negative
+
+- sim(a, b) : similarity function (e.g., cosine similarity)
+
+1) TopK-MarginPos
 ```python
-# q : query, p : positive, n : negative
 for n in top_k_negatives:
     if sim(n, q) < sim(p, q) - margin:  # TopK-MarginPos
         keep n
 ```
 
-→ 또는 `sim(n, q) < sim(p, q) * 0.9` (TopK-PercPos)
+2) TopK-PercPos
+```python
+for n in top_k_negatives:
+    if sim(n, q) < sim(p, q) * perc:  # TopK-PercPos
+        keep n
+```
+
 
 #### 장점
 

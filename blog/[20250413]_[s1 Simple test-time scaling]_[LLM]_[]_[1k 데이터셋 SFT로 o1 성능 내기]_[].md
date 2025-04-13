@@ -15,7 +15,7 @@ https://arxiv.org/html/2501.19393v3
 
 ---
 
-## 1. **s1K 데이터셋**
+## 1. s1K 데이터셋
 
 - Google Gemini에서 추출한 고품질 reasoning 문제 1,000개
 - 3가지 기준으로 선별:
@@ -30,19 +30,19 @@ https://arxiv.org/html/2501.19393v3
 > ❗ Ablation으로 증명: 무작위 샘플이나 reasoning trace 길이 기준만 쓰면 성능 뚝 떨어짐 (~30%)
 > 
 
-## 2. **Budget Forcing (생각 시간 조절 기법)**
+## 2. Budget Forcing (생각 시간 조절 기법)
 
 - 모델이 “너무 빨리 답하려고 할 때” → **“Wait”를 넣어 더 생각하게 함**
 - 모델이 “생각을 너무 오래할 때” → **“종료 토큰”을 강제로 삽입해 생각 마침**
 - 이렇게 해서 **test-time compute 조절이 가능**해짐
 
-## 3. **모델: s1-32B**
+## 3. 모델: s1-32B
 
 - Qwen2.5-32B-Instruct를 SFT만으로 fine-tune (26분, 16xH100)
 - test-time에서 Budget Forcing을 써서 reasoning 향상
 - OpenAI o1-preview보다 AIME24, MATH에서 최대 27% 더 잘함
 
-# **2. Reasoning data curation to create s1K**
+# 2. Reasoning data curation to create s1K
 
 > s1K란?
 > 

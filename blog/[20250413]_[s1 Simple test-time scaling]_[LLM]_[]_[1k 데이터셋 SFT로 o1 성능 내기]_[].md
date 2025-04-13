@@ -15,7 +15,7 @@ https://arxiv.org/html/2501.19393v3
 
 ---
 
-## 1. s1K 데이터셋
+**1) s1K 데이터셋**
 
 - Google Gemini에서 추출한 고품질 reasoning 문제 1,000개
 - 3가지 기준으로 선별:
@@ -30,13 +30,13 @@ https://arxiv.org/html/2501.19393v3
 > ❗ Ablation으로 증명: 무작위 샘플이나 reasoning trace 길이 기준만 쓰면 성능 뚝 떨어짐 (~30%)
 > 
 
-## 2. Budget Forcing (생각 시간 조절 기법)
+**2) Budget Forcing (생각 시간 조절 기법)**
 
 - 모델이 “너무 빨리 답하려고 할 때” → **“Wait”를 넣어 더 생각하게 함**
 - 모델이 “생각을 너무 오래할 때” → **“종료 토큰”을 강제로 삽입해 생각 마침**
 - 이렇게 해서 **test-time compute 조절이 가능**해짐
 
-## 3. 모델: s1-32B
+**3) 모델: s1-32B**
 
 - Qwen2.5-32B-Instruct를 SFT만으로 fine-tune (26분, 16xH100)
 - test-time에서 Budget Forcing을 써서 reasoning 향상
@@ -58,7 +58,7 @@ https://arxiv.org/html/2501.19393v3
 
 ---
 
-## ① 2.1 Initial Collection (59K 수집 과정)
+**2.1 Initial Collection (59K 수집 과정)**
 
 **🔍 수집 기준:**
 
@@ -90,7 +90,7 @@ https://arxiv.org/html/2501.19393v3
 
 ---
 
-## ② 2.2 Final Selection (1K 선별 방식)
+**2.2 Final Selection (1K 선별 방식)**
 
 **핵심 목표**
 
@@ -102,14 +102,14 @@ https://arxiv.org/html/2501.19393v3
 
 ---
 
-## 🔍 Step 1: Quality 필터링
+**🔍 Step 1: Quality 필터링**
 
 - API 오류 있는 문제 제외 → 54K
 - 포맷 문제 있는 문제 제외 (그림 없음, ASCII art 등) → 51K
 
 ---
 
-## 🔍 Step 2: Difficulty 필터링
+**🔍 Step 2: Difficulty 필터링**
 
 **✅ 난이도 측정 방법:**
 
@@ -126,7 +126,7 @@ https://arxiv.org/html/2501.19393v3
 
 ---
 
-## 🔍 Step 3: Diversity 필터링
+**🔍 Step 3: Diversity 필터링**
 
 **분포 고려 방법:**
 
@@ -143,7 +143,7 @@ https://arxiv.org/html/2501.19393v3
 
 ---
 
-## 🔍 부가 정보
+**🔍 부가 정보**
 
 - **정답률**: s1K 전체에서 Claude 채점 기준 정답률은 53.6%
 - 정답이 틀린 문제도 일부 포함 → 이유: **모델이 답을 틀리더라도 추론 과정이 중요하다는 철학**

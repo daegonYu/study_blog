@@ -197,9 +197,9 @@ https://arxiv.org/html/2501.19393v3
 | 방법 | 설명 |
 | --- | --- |
 | **Conditional length-control** | prompt에 “생각 5단계만 해” 식으로 유도 |
-| - Token conditional | 토큰 수로 제어 (예: 500자 이내) |
-| - Step conditional | “생각 단계” 수로 제어 (예: 3단계만 생각) |
-| - Class conditional | “짧게 생각” / “길게 생각” 같은 일반 지시어 |
+| 1) Token conditional | 토큰 수로 제어 (예: 500자 이내) |
+| 2) Step conditional | “생각 단계” 수로 제어 (예: 3단계만 생각) |
+| 3) Class conditional | “짧게 생각” / “길게 생각” 같은 일반 지시어 |
 | **Rejection sampling** | 여러 샘플 중 compute budget에 맞는 것만 사용 (오라클(하단 부연설명 참고) 방식) |
 
 
@@ -240,7 +240,7 @@ https://arxiv.org/html/2501.19393v3
 | 그림 | 설명 |
 | --- | --- |
 | **(a)** Sequential Scaling – Budget Forcing | “Wait”를 2/4/6번 넣을수록 → 정확도 증가→ **선형적으로 성능이 향상**됨 (좋은 scaling 곡선) |
-| **(b)** Parallel Scaling – Majority Voting | 64번 샘플링 후 다수결→ **추론력보다는 평균화 효과**, scaling 효과는 낮음 |
+| **(b)** Parallel Scaling – Majority Voting | 64번 샘플링 후 다수결→ scaling 효과는 낮음 |
 
 # 4. Result
 

@@ -203,7 +203,7 @@ https://arxiv.org/html/2501.19393v3
 | **Rejection sampling** | 여러 샘플 중 compute budget에 맞는 것만 사용 (오라클(하단 부연설명 참고) 방식) |
 
 
-**📏 3.2 Metrics — **좋은 Test-time Scaling 방법의 3대 조건**
+**📏 3.2 Metrics — 좋은 Test-time Scaling 방법의 3대 조건**
 
 
 **✅ ① Control (제어력)**
@@ -334,14 +334,102 @@ https://arxiv.org/html/2501.19393v3
     
     → **Distillation 품질도 우수했음을 반증**
     
+# 5. Ablations
+
+**🧪 5.1 Data Ablation — 왜 s1K가 특별한가?**
+
+**🎯 목적**
+
+> s1K(1,000개 고품질 데이터)가 단순히 운이 좋은 게 아니라,
+> 
+> 
+> **정말로 ‘좋은 구성 방식’으로 선택되었는가?** → 실험으로 검증
+> 
+
 ---
 
+**🧠 실험 대상: s1K vs 대체 방식**
 
+| 이름 | 구성 방식 | 특징 |
+| --- | --- | --- |
+| **1K-random** | s1K 풀에서 무작위 1K | Quality만 반영 (Difficulty, Diversity 無) |
+| **1K-diverse** | 도메인 다양성 최우선 | 난이도 고려 안 함 |
+| **1K-longest** | 추론 token 가장 긴 1K | 오직 Difficulty 기반 |
+| **59K-full** | 전체 59K 학습 | 최대한의 양 (GPU 394시간 필요) |
+| **s1K** | Quality + Difficulty + Diversity 기반 | 본 논문 핵심 방식 (GPU 7시간만 필요) |
+
+---
+
+**📊 Table 2 해설**
+
+| Model | AIME24 | MATH500 | GPQA | 의미 |
+| --- | --- | --- | --- | --- |
+| **1K-random** | 36.7 | 90.6 | 52.0 | 무작위는 확실히 낮음 (성능 저하 확인) |
+| **1K-diverse** | 26.7 | 91.2 | 54.6 | 도메인 다양성만 있어도 성능 저조 |
+| **1K-longest** | 33.3 | 90.4 | **59.6** | GPQA는 높지만 전체적으로 s1K보다 약함 |
+| **59K-full** | 53.3 | 92.8 | 58.1 | 양을 늘리면 좋아지긴 하나, 비용↑ |
+| **s1K** | 50.0 | **93.0** | 57.6 | 압도적인 효율성 (성능과 비용의 균형) |
+
+✅ 결론: Quality + Difficulty + Diversity **세 가지를 모두 고려해야 최고의 sample 효율성 확보 가능**
+
+---
+
+**🔧 5.2 Test-time Scaling Method Ablation**
+
+**🎯 목적**
+
+> 다양한 방법 중 Budget Forcing(BF)이 왜 가장 효과적인가?
+> 
+
+---
+
+**📊 Table 3 해설**
+
+| Method | Control | Scaling (↑좋음) | Performance (↑좋음) | 설명 |
+| --- | --- | --- | --- | --- |
+| **BF (★)** | 100% | **15** | **56.7** | 완벽한 제어 + 우수한 scaling |
+| TCC | 40% | -24 | 40.0 | 모델이 token 수 정확히 못 셈 |
+| TCC + BF | 100% | 13 | 40.0 | BF는 제어 되지만 성능은 낮음 |
+| SCC | 60% | 3 | 36.7 | 스텝 단위 제어, 효과 미미 |
+| SCC + BF | 100% | 6 | 36.7 | 제어는 OK, scaling은 낮음 |
+| CCC | 50% | 25 | 36.7 | “길게 생각해라” 식의 프롬프트, scaling만 좋음 |
+| RS (Rejection Sampling) | 100% | **-35** | 40.0 | 성능은 낮고 scaling은 반대로 작동함 (!) |
+
+→ **BF만이 세 가지 지표(제어력 + scaling + 성능) 모두 우수**
+
+---
+
+**🧠 Rejection Sampling 왜 안 될까?**
+
+| Compute 제약 | 결과 경향 |
+| --- | --- |
+| 짧은 generation (≤4000 tokens) | 바로 정답 접근, 성능 ↑ |
+| 긴 generation (≥8000 tokens) | 시행착오 반복 → 정답에서 멀어짐 |
+
+> 🎯 Hypothesis: 모델이 초기에 "감이 올 때"는 빨리 맞추고,
+> 
+> 
+> **헷갈릴수록 토큰 수만 늘고 오히려 실패함**
+> 
+
+---
+
+**📏 Table 4 – “Wait” vs 다른 문자열 비교**
+
+| 방식 | AIME24 | GPQA | 의미 |
+| --- | --- | --- | --- |
+| No extrapolation | 50.0 | 57.6 | 기본값 |
+| 2x without string | 50.0 | 55.1 | “Wait” 없이 그냥 더 기다리게 |
+| “Alternatively” | 50.0 | 59.6 | 대안 탐색 유도 효과 O |
+| “Hmm” | 50.0 | 59.6 | 내적 회의 유도 |
+| **“Wait” (★)** | **53.3** | **59.6** | 가장 단순하면서도 효과 가장 좋음 |
+
+✅ 결론: **“Wait”이라는 단어가 가장 범용적이며 반복적인 reasoning을 잘 유도**
 
 
 # 부가 설명
 
-1. 🔍 오라클 방식 (Rejection Sampling as Oracle)
+### 1. 🔍 오라클 방식 (Rejection Sampling as Oracle)
 
 💡 기본 개념
 
@@ -390,3 +478,79 @@ https://arxiv.org/html/2501.19393v3
 | 효율성 | 매우 낮음 (계산 비용 큼) | 매우 높음 |
 | 실제 적용 | 실용적 아님 (이론적 upper bound) | 실용적, 단순한 구현 가능 |
 | 목적 | 성능 최대치 파악 | 실제 scaling 구현 및 테스트 |
+
+
+### 2. TCC, SCC
+
+**🔢 TCC (Token-Conditional Control)**
+
+**🧠 개념**
+
+- 모델에게 직접 “생각은 300토큰까지만 해”와 같은 **정확한 토큰 수 조건**을 주는 방식입니다.
+- 예시 프롬프트:
+    
+    > “Please think carefully and stop after 300 tokens of reasoning before giving your final answer.”
+    > 
+
+---
+
+**🚫 문제점**
+
+1. **LLM은 자신이 몇 token을 생성했는지 모르기 때문에**,
+    
+    실제로 300 token 넘겨도 계속 reasoning하거나 더 짧게 끝내버리는 경우가 많습니다.
+    
+2. 이 방식은 프롬프트 기반 유도이기 때문에 **명시적인 강제성이 없습니다.**
+
+---
+
+**💡 결론**
+
+> TCC는 이론적으로 정밀해 보이지만,
+> 
+> 
+> LLM의 내부 구조상 **자기 토큰 수를 정확히 셀 수 없기 때문에** 실패합니다.
+> 
+
+---
+
+### 🔁 SCC (Step-Conditional Control)
+
+**🧠 개념**
+
+- reasoning을 여러 “스텝”으로 나누고, “3스텝까지만 생각해”처럼 **step 수를 제한**
+- 각 스텝은 보통 약 100 token 내외로 간주
+- 예시 프롬프트:
+    
+    > “Think in exactly 3 reasoning steps before giving your answer.”
+    > 
+
+---
+
+**⚠️ 문제점**
+
+1. 모델이 **스텝 개수는 맞추지만**,
+    
+    실제로는 **한 스텝에 토큰을 몰아서 쓰는 방식**으로 **제약을 우회**합니다.
+    
+    - 예: “1단계: 매우 길게 설명… 2단계: 짧게… 3단계: 끝”
+2. 스텝 수를 바꿔도 **총 토큰 수는 거의 일정하거나 증가하지 않음**
+
+---
+
+## ✅ 두 방식의 한계 정리
+
+| 항목 | TCC | SCC |
+| --- | --- | --- |
+| 방식 | “토큰 수 제한” | “생각 단계 수 제한” |
+| 문제 | LLM이 token 수 못 셈 | 단계 수는 맞춰도 token 분배를 조작 |
+| 결과 | 제어력, 성능, scaling 모두 낮음 | scaling 거의 없음 |
+| 결론 | **직접적인 강제력이 없어 실패** | **형식만 제어, 실질적 compute 제어 실패** |
+
+---
+
+### 왜 Budget Forcing이 우월한가?
+
+- **프롬프트가 아닌 디코딩 중 직접 개입 (e.g. “Wait” 추가, end-of-thinking 억제)**
+- → 제어력이 **100%**이며, scaling도 긍정적
+

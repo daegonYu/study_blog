@@ -426,10 +426,139 @@ https://arxiv.org/html/2501.19393v3
 
 ✅ 결론: **“Wait”이라는 단어가 가장 범용적이며 반복적인 reasoning을 잘 유도**
 
+# 부록(상세 설명)
+
+(My view: 사실 부록이 핵심이라고 생각한다.)
+
+## C. s1K details
+
+**✅ C.3 Grading Prompt – 정답 여부는 어떻게 판단했는가?**
+
+**🧠 목적**
+
+s1K를 만들 때 각 문제에 대해 LLM이 낸 답이 **맞았는지 틀렸는지 판단**이 필요합니다.
+
+이를 위해 **Claude 3.5/3.7** 모델을 채점기로 사용하며, 다음과 같은 **프롬프트를 통일해 사용**했습니다.
+
+**📋 프롬프트 구조 (핵심 요약)**
+
+```
+# Problem
+{문제}
+
+## Attempt
+{학생의 답변}
+
+## Correct answer
+{정답}
+
+[판단 기준: 숫자면 모호성 없이 같아야 함, 추론 과정이면 reasoning이 타당한지 평가]
+
+Explain your reasoning.
+End with: "Yes" or "No"
+
+```
+
+→ Claude가 “답이 맞는지”를 최종적으로 “Yes” / “No”로 명확히 판단하게 만듭니다.
+
+→ Claude 3.7은 **최종 1,000개에 대한 채점**에만 사용 (더 정밀한 버전)
+
+---
+
+**✅ C.4 s1K Diversity Selection – 도메인 다양성은 어떻게 확보했는가?**
+
+**📌 핵심 알고리즘 (Algorithm 1)**
+
+1. 먼저 `24,496`개의 후보 중 **AIME, GPQA**, **긴 reasoning trace가 있는 MATH 문제**를 먼저 확보
+2. 그 외에는 도메인 기반으로 아래 방식으로 추출:
+    - 랜덤하게 하나의 도메인 선택 (예: 기하학, 생물학 등)
+    - 그 도메인 내 문제들을 **thinking token 길이로 정렬**
+    - 길이가 길수록 sampling 확률 증가 (power-law 분포)
+    - 하나 뽑아서 전체에서 제거
+    - 50개 도메인 돌아가며 반복 → 총 1,000개 확보
+
+👉 **긴 reasoning을 더 선호하면서**, 도메인 다양성도 보장되도록 설계
+
+---
+
+**✅ C.5 Decontamination – 평가셋 중복 제거는 어떻게?**
+
+- 평가셋(MATH500, GPQA Diamond, AIME24)과 **8-gram 중복 검사**를 시행
+
+---
+
+# ✅ D. Training Details – 훈련 세팅은 어떻게 했는가?
+
+| 항목 | 내용 |
+| --- | --- |
+| 🔧 모델 | Qwen2.5-32B-Instruct (이미 SFT된 상태에서 추가 학습) |
+| 🧠 학습 대상 | 질문 자체는 학습 X, 오직 reasoning trace + 답변에만 loss 부여 |
+| ⚙️ 하이퍼파라미터 | batch 16, epoch 5, 총 315 step, lr=1e-5, AdamW |
+| ⏱️ 훈련 시간 | 단 26분 (16×H100 GPU) |
+| 💾 정밀도 | bfloat16, warmup 5%, cosine decay |
+
+![image](https://github.com/user-attachments/assets/3fe10b29-426c-4a87-984b-442c4e3e20b5)
+
+
+(My view: 학습 로그 중 Gradient Norm 부분에 150step 쯤 확 튀는 것을 볼 수 있다. 나의 학습의 경우도 저렇게 튀는 모습이 있었는데 그것이 크게 이상한 점이 아니라는 것을 깨달았다.)
+
+**D.1. Training Ablations: Sequence length**
+
+> “훈련 시 사용한 sequence length가 실제 reasoning 성능과 추론 시 비용에 어떤 영향을 미치는가?”
+> 
+
+---
+
+**📊 훈련 sequence length 와 성능의 관계**
+
+| 모델 | 훈련 sequence length 길이 | 학습 데이터 잘림 비율 | AIME24 | MATH500 | GPQA |
+| --- | --- | --- | --- | --- | --- |
+| **Model A** | 4,096 | 74% 잘림 | 30.0% / 20,721 tokens | 90.0% / 5,324 | 52.5% / 6,841 |
+| **Model B** | 32,768 | 0% 잘림 | **50.0% / 6,984 tokens** | **91.0% / 3,268** | **53.0% / 3,568** |
+
+✔️ 분모는 inference 시 사용된 평균 reasoning token 수
+
+→ 즉, **정확도는 높고 reasoning 길이는 짧을수록** 좋음 (속도/비용/정확도 모두 잡는 구조)
+
+---
+
+**📌 원인과 해석**
+
+**🔴 문제점: 짧은 시퀀스 길이 (4096)**
+
+- 훈련 시 전체 샘플의 **74%가 중간에 잘림(cutoff)** → 특히 **정답(answer)** 부분이 잘림
+- 이로 인해:
+    - 모델은 **답을 생성하는 경험이 부족**
+    - 추론 시 **답을 내기 전에 reasoning을 질질 끄는** 경향 (→ 길어짐)
+
+---
+
+**🟢 해결: 긴 시퀀스 길이 (32768)**
+
+- 거의 모든 샘플이 **완전하게 포함됨**
+- 모델이 다음과 같은 습관을 학습:
+    - `chain of thought` → 곧바로 `final answer`로 이어짐
+    - → 추론 과정에서도 **짧고 효율적인 reasoning** 유도
+- 결과적으로:
+    - **성능 향상 + 추론 토큰 수 감소** = 비용 절감 효과도 큼
+
+---
+
+**✅  Training Ablations: Sequence length 요약**
+
+| 항목 | 요약 |
+| --- | --- |
+| 📉 짧은 시퀀스 | 정답 학습 부족 → reasoning 길어짐, 성능 저하 |
+| 📈 긴 시퀀스 | 완전 학습 → reasoning과 정답 간 연결 강함 → 추론 효율 ↑ |
+| 🔁 실전 Tip | **sequence length를 무작정 줄이면 추론 비용이 높아지고 성능도 떨어질 수 있음** |
+| 🧠 모델 행태 | 시퀀스 길이는 “답까지 자연스럽게 이어지는 경험”을 줄 수 있는 핵심 하이퍼파라미터 |
+
+(My view: 당연하다고 생각 들 수 있지만 나의 경우 GRPO 학습 시(이 논문은 SFT로 학습하였습니다.) 충분한 sequence length로 학습했을 때 그렇지 않을 때보다 loss는 더 잘 수렴하고 Reward std는 줄고 총 Reward 값은 상승하는 효과를 보았다. 적절한 sequence length로 학습하는 것은 중요하다. 물론 GPU VRAM 소모량이 크겠지만 모델 성능을 높이기 위해서는 양보하면 안될 것 같다.)
+
 
 # 부가 설명
 
-### 1. 🔍 오라클 방식 (Rejection Sampling as Oracle)
+**1. 🔍 오라클 방식 (Rejection Sampling as Oracle)**
 
 💡 기본 개념
 
@@ -469,7 +598,7 @@ https://arxiv.org/html/2501.19393v3
 
 ---
 
-✅ 비교 요약: 오라클 vs Budget Forcing
+**✅ 비교 요약: 오라클 vs Budget Forcing**
 
 | 항목 | Oracle (Rejection Sampling) | Budget Forcing |
 | --- | --- | --- |
@@ -538,7 +667,7 @@ https://arxiv.org/html/2501.19393v3
 
 ---
 
-## ✅ 두 방식의 한계 정리
+**✅ 두 방식의 한계 정리**
 
 | 항목 | TCC | SCC |
 | --- | --- | --- |
@@ -549,7 +678,7 @@ https://arxiv.org/html/2501.19393v3
 
 ---
 
-### 왜 Budget Forcing이 우월한가?
+**왜 Budget Forcing이 우월한가?**
 
 - **프롬프트가 아닌 디코딩 중 직접 개입 (e.g. “Wait” 추가, end-of-thinking 억제)**
 - → 제어력이 **100%**이며, scaling도 긍정적

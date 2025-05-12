@@ -4,8 +4,8 @@
         "download_url": "/menu/about.md"
     },
     {
-        "name": "blog.md",
-        "download_url": "/menu/blog.md"
+        "name": "paper.md",
+        "download_url": "/menu/paper.md"
     },
     {
         "name": "huggingface.md",
@@ -18,5 +18,9 @@
     {
         "name": "youtube.md",
         "download_url": "/menu/youtube.md"
-    }
+    },
+    {
+        "name": "blog.md",
+        "download_url": "/menu/blog.md"
+    },
 ]

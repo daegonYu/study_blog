@@ -223,6 +223,8 @@ https://arxiv.org/html/2407.18887v1
 - 완전히 다른 topic끼리 묶은 negative는 너무 쉬움 (easy negatives)
 - → 그래서 **같은 topic 내에서의 negative (harder)**가 더 유익함
 
+---
+
 **🔹 4.2 Concept Two: ANCE Perspective on Hard Negative Mining**
 
 **📘 ANCE (Xiong et al., 2020)의 방식**
@@ -248,6 +250,8 @@ https://arxiv.org/html/2407.18887v1
 > 
 > 더 **미묘한 차이**를 구분하는 법을 배움 = **좋은 임베딩 모델로 발전**
 > 
+
+---
 
 **🔹 4.3 A Possible Synthesis**
 
@@ -331,8 +335,6 @@ Figure 3(b): 다른 토픽의 벡터들
 > 
 > 이에 대한 저자의 답변은 **효율성과 비용의 문제**입니다.
 > 
-
----
 
 **🔧 Hard Negative Mining의 한계 (Pretraining 기준)**
 

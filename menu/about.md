@@ -25,3 +25,5 @@ I am an **NLP researcher** with a strong focus on **semantic retrievers, retriev
 
 ## 📫 Contact  
 📧 Feel free to reach out for collaborations, discussions, or just to connect!  
+
+linkedin : www.linkedin.com/in/대곤-유-43b897323
